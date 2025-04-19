@@ -7,9 +7,11 @@ function App() {
   const addValue = () => {
     // Homework - Not increase more than 10
     if (counter <= 9) {
-      setCounter(counter + 1);
+      setCounter((prevCounter) => prevCounter + 1);
+      setCounter((prevCounter) => prevCounter + 1);
+      setCounter((prevCounter) => prevCounter + 1);
+      setCounter((prevCounter) => prevCounter + 1);
     }
-    
   };
   const removeValue = () => {
     // Homework - Not decrease less than 0
