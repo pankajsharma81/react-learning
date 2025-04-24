@@ -1,6 +1,7 @@
 // import Person from './Person'
 // import Button from "./Button";
-import Header from "./Header";
+// import Header from "./Header";
+// import List from "./List";
 
 import "./App.css";
 
@@ -9,7 +10,8 @@ function App() {
     <>
       {/* <Person name="Pankaj" age="21" /> */}
       {/* <Button text="Submit" onClick={() => {console.log("Button Clicked!!")}}/*/}
-      <Header title="React JS"/>
+      {/* <Header title="React JS"/> */}
+      <List items={["apple", "mongo", "orange"]} />
     </>
   );
 }
