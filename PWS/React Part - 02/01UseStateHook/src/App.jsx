@@ -1,10 +1,13 @@
-import Counter from "./Counter"
+// import Counter from "./Counter"
+
+import Conditional from "./Conditional"
 
 function App() {
 
   return (
     <>
-      <Counter/>
+      {/* <Counter/> */}
+      <Conditional/>
     </>
   )
 }
