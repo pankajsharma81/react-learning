@@ -1,9 +1,9 @@
-import React from "react";
-import { useState } from "react";
-import "./Grid.css"
 import Card from "../Card/card";
+import "./Grid.css";
 
-const Grid = ({numberOfCards}) => {
+import { useState } from "react";
+
+const Grid = ({ numberOfCards }) => {
   const [board, setBoard] = useState(Array(numberOfCards).fill(""));
   return (
     <div className="grid">
