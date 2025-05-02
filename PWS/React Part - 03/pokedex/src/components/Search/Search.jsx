@@ -1,11 +1,15 @@
-import React from 'react'
+import './Search.css';
 
 const Search = () => {
   return (
-    <>
-    <input type="text"  placeholder='pls search'/>
-    </>
-  )
-}
+    <div className="search-wrapper">
+      <input
+        id="pokemon-name-search"
+        type="text"
+        placeholder="pokemon name..."
+      />
+    </div>
+  );
+};
 
-export default Search
+export default Search;
