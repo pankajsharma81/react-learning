@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./PokemonList.css";
 import Pokemon from "../Pokemon/Pokemon";
@@ -14,9 +14,10 @@ const PokemonList = () => {
 
   async function downloadPokemons() {
     setIsLoading(true);
-    const response = await axios.get(pokedexUrl); //this downloads list of 20 pokemon
 
+    const response = await axios.get(pokedexUrl); //this downloads list of 20 pokemon
     const pokemonResults = response.data.results; // we get the array of pokemons from result
+
     setNextUrl(response.data.next);
     setPrevUrl(response.data.previous);
 
@@ -24,10 +25,11 @@ const PokemonList = () => {
     const pokemonResultsPromise = pokemonResults.map((pokemon) =>
       axios.get(pokemon.url)
     );
-
+    
     // passing that promise array to axios.all
     const pokemonData = await axios.all(pokemonResultsPromise); //array of 20 pokemon detailed data
-
+    // console.log(pokemonData)
+    
     // now iterate on the data of each pokemon, and extract id, name, image, types
     const pokeListResult = pokemonData.map((pokeData) => {
       const pokemon = pokeData.data;
@@ -57,7 +59,7 @@ const PokemonList = () => {
         {isLoading
           ? "Loading...."
           : pokemonList.map((p) => (
-              <Pokemon name={p.name} image={p.image} key={p.id} />
+              <Pokemon name={p.name} image={p.image} key={p.id} id={p.id} />
             ))}
       </div>
       <div className="controls">
