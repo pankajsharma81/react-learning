@@ -8,11 +8,12 @@ const usePokemonList = () => {
     pokedexUrl: "https://pokeapi.co/api/v2/pokemon",
     nextUrl: "",
     prevUrl: "",
+    
   });
 
   async function downloadPokemons() {
     setPokemonListState((state) => ({ ...state, isLoading: true }));
-
+    console.log(pokemonListState.pokedexUrl);
     const response = await axios.get(pokemonListState.pokedexUrl); //this downloads list of 20 pokemon
     const pokemonResults = response.data.results; // we get the array of pokemons from result
 
@@ -52,11 +53,11 @@ const usePokemonList = () => {
     }));
   }
 
-    useEffect(() => {
-      downloadPokemons();
-    }, [pokemonListState.pokedexUrl]);
-  
-    return [pokemonListState,setPokemonListState]
+  useEffect(() => {
+    downloadPokemons();
+  }, [pokemonListState.pokedexUrl]);
+
+  return [pokemonListState, setPokemonListState];
 };
 
 export default usePokemonList;
