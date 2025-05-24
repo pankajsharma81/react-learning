@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import Todo from "../Todo/Todo";
+import TodoContext from "../../context/TodoContext";
 
-const TodoList = ({ list, updateList }) => {
+const TodoList = () => {
+  const { list, setList } = useContext(TodoContext);
   return (
     <div>
       {list.length > 0 &&
@@ -10,7 +13,7 @@ const TodoList = ({ list, updateList }) => {
             id={todo.id}
             isFinished={todo.finished}
             todoData={todo.todoData}
-            // not get ......................................
+            // isFinished - CheckBox ......................................
             changeFinished={(isFinished) => {
               const updatedList = list.map((t) => {
                 if (t.id == todo.id) {
@@ -18,7 +21,22 @@ const TodoList = ({ list, updateList }) => {
                 }
                 return t;
               });
-              updateList(updatedList);
+              setList(updatedList);
+            }}
+            // onDelete ....................................
+            onDelete={() => {
+              const updatedList = list.filter((t) => t.id != todo.id);
+              setList(updatedList);
+            }}
+            // onEdit ......................................
+            onEdit={(todoText) => {
+              const updatedList = list.map((t) => {
+                if (t.id == todo.id) {
+                  todo.todoData = todoText;
+                }
+                return t;
+              });
+              setList(updatedList);
             }}
           />
         ))}
