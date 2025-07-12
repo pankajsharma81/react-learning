@@ -1,37 +1,50 @@
-import { useState } from "react";
+
 import { nanoid } from "nanoid";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 // add Task ..........................................................................
 const Create = (props) => {
   const todo = props.todo;
   const setTodo = props.setTodo;
-  const [task, setTask] = useState("");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const submitHandler = (data) => {
+    data.isCompleted = false;
+    data.id = nanoid();
+    console.log(data);
 
-    const newTask = {
-      id: nanoid(),
-      task: task,
-      isCompleted: false,
-    };
     const copytodos = [...todo];
-    copytodos.push(newTask);
+    copytodos.push(data);
     setTodo(copytodos);
+    toast.success("Created task")
 
-    setTask("");
+    reset();
   };
 
   return (
     <div>
-      <h1 style={{color:"red"}}>Todo</h1>
-      <form onSubmit={submitHandler}>
+      <h1 style={{ color: "red" }}>Todo</h1>
+      <form onSubmit={handleSubmit(submitHandler)}>
         <input
-          type="text"
+          {...register("task", { required: "title can not be empty" })}
+          type="text" 
           placeholder="Enter task"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
         />
+
+        {/* for error showing */}
+
+        {/* {errors && errors.task && errors.task.message && (
+          <small>{errors.task.message}</small>
+        )} */}
+
+        <small>{errors?.task?.message}</small>
+
         <button>Create Todo</button>
       </form>
     </div>
